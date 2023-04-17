@@ -1,0 +1,26 @@
+<configuration>
+  <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="appName"/>
+  <springProperty scope="context" name="rootLevel" source="logging.level.root" defaultValue="INFO"/>
+  <springProperty scope="context" name="maskLog" source="logging.masklog.keys" defaultValue=""/>
+
+
+
+
+  <root level="${rootLevel}">
+    <springProfile name="ci,sit,uat,str,pre,prd,qa,dev-r1,dev-r2,qa-r1,qa-r2,dev,cloud-dev,cloud-qa,cloud-sit-1,cloud-sit-2,cloud-prd,dr,cloud-np1,cloud-np2,cloud-np3,cloud-np4,cloud-np5">
+      <appender-ref ref="ERROR-FILE"/>
+    </springProfile>
+    <springProfile name="dev,qa,dev-r1,dev-r2,qa-r1,qa-r2,cloud-dev,cloud-qa,cloud-sit-1,cloud-sit-2,cloud-prd,dr,cloud-np1,cloud-np2,cloud-np3,cloud-np4,cloud-np5">
+      <appender-ref ref="STDOUT"/>
+    </springProfile>
+  </root>
+
+  <logger name="com.hisun.lemon.framework.aop.ControllerAspect" level="INFO" additivity="false">
+    <springProfile name="dev,qa,dev-r1,dev-r2,qa-r1,qa-r2,cloud-dev,cloud-qa,cloud-sit-1,cloud-sit-2,cloud-prd,dr, cloud-np1, cloud-np2, cloud-np3, cloud-np4, cloud-np5">
+      <appender-ref ref="STDOUT"/>
+    </springProfile>
+  </logger>
+
+
+
+</configuration>
